@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlinx-serialization'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace 'dantotsu.torrentAddon'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 34
+        versionName "1.0.1"
+        versionCode 2
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        signingConfig signingConfigs.debug
+
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+                universalApk true
+            }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = []
+            manifest.srcFile "AndroidManifest.xml"
+        }
+    }
+    android {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3'
+    implementation 'com.github.inorichi.injekt:injekt-core:65b0440'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.12'
+    implementation(files("libs/server.aar"))
+    implementation(files("libs/server-sources.jar"))
+}

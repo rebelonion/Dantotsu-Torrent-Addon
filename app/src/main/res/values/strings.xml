@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Dantotsu Torrent Extension</string>
+    <string name="torrserver">Torrent Server</string>
+    <string name="torrent_running">Server is running…</string>
+</resources>

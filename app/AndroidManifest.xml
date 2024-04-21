@@ -11,7 +11,7 @@
 
     <uses-sdk tools:overrideLibrary="go.server.gojni" />
     <application
-        android:label="Dantotsu Torrent Addon"
+        android:label="Dantotsu: Torrent Addon"
         tools:targetApi="R" >
     </application>
 
